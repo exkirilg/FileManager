@@ -3,13 +3,13 @@ using System.ComponentModel;
 
 namespace FileManager.ViewModels;
 
-public partial class ApplicationViewModel : INotifyPropertyChanged
+public partial class AppVM : INotifyPropertyChanged
 {
-    private readonly IFileSystemServices _fileSystemServices;
+    private readonly IFileSystemServices _fsServices;
 
-    public ApplicationViewModel(IFileSystemServices fileSystemServices)
+    public AppVM(IFileSystemServices fileSystemServices)
     {
-        _fileSystemServices = fileSystemServices;
+        _fsServices = fileSystemServices;
 
         CurrentPath = string.Empty;
 

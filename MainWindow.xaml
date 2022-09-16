@@ -7,29 +7,24 @@
         xmlns:local="clr-namespace:FileManager"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    
-    <Grid>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
+    <DockPanel LastChildFill="True">
 
-        <Rectangle Grid.Row="0" Fill="#FFEEEEEE" />
-        
-        <Grid Grid.Row="0">
+        <Grid DockPanel.Dock="Top" Background="#FFEEEEEE" Height="40">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.1*" MaxWidth="25" />
-                <ColumnDefinition Width="0.1*" MaxWidth="35" />
+                <ColumnDefinition Width="75" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding BackCommand}" Padding="5 0">
+            <Button Grid.Column="0"
+                Background="{x:Null}" BorderBrush="{x:Null}"
+                Command="{Binding BackCommand}"
+                HorizontalAlignment="Right" Margin="0 0 10 0">
                 <Image Source="pack://application:,,,/Icons/back-arrow.ico" />
             </Button>
 
-            <ListBox Grid.Column="2" ItemsSource="{Binding PartsOfPath}" Background="#FFEEEEEE" BorderBrush="{x:Null}">
+            <ListBox Grid.Column="1" ItemsSource="{Binding PartsOfPath}" Background="{x:Null}" BorderBrush="{x:Null}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" />
@@ -37,21 +32,43 @@
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Path=Presentation}">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseDown">
-                                    <i:InvokeCommandAction
-                                        Command="{Binding Path=DataContext.SetCurrentPathCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                        CommandParameter="{Binding Path=FullPath}" />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
+                        <TextBlock Text="{Binding Path=Presentation}" FontSize="14">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDown">
+                                <i:InvokeCommandAction
+                                    Command="{Binding Path=DataContext.SetCurrentPathCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                    CommandParameter="{Binding Path=FullPath}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         </TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
 
         </Grid>
-        
-    </Grid>
-    
+
+        <ListBox ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" Background="#FFEEEEEE">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+
+                        <Image Grid.Column="0" Source="{Binding Path=IconSource}" />
+                        <TextBlock Grid.Column="1" Text="{Binding Path=Item.Name}" VerticalAlignment="Center" FontSize="14" />
+
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </DockPanel>
+
 </Window>

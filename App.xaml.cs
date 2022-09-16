@@ -17,7 +17,7 @@ public partial class App : Application
 			{
 				services.AddSingleton<MainWindow>();
 				services.AddSingleton<IFileSystemServices, FileSystemServices>();
-				services.AddSingleton<ApplicationViewModel>();
+				services.AddSingleton<AppVM>();
 			})
 			.Build();
 	}

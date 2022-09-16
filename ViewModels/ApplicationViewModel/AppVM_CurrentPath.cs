@@ -6,7 +6,7 @@ using System.Text;
 
 namespace FileManager.ViewModels;
 
-public partial class ApplicationViewModel
+public partial class AppVM
 {
     private string _currentPath;
 
@@ -19,6 +19,9 @@ public partial class ApplicationViewModel
             {
                 _currentPath = value;
                 PartsOfPath.Clear();
+                Items.Clear();
+
+                PopulateItemsWithDrives();
             }
             else
             {
@@ -27,12 +30,15 @@ public partial class ApplicationViewModel
 
                 _currentPath = dirInfo.FullName;
                 PartsOfPath.Clear();
+                Items.Clear();
 
                 PopulatePartsOfPath(dirInfo.FullName);
+                PopulateItems();
             }
 
             OnPropertyChanged(nameof(CurrentPath));
             OnPropertyChanged(nameof(PartsOfPath));
+            OnPropertyChanged(nameof(Items));
         }
     }
     public ObservableCollection<PartOfPath> PartsOfPath { get; init; } = new();

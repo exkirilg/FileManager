@@ -17,6 +17,11 @@
 
   <ItemGroup>
     <None Remove="Icons\back-arrow.ico" />
+    <None Remove="Icons\drive.ico" />
+    <None Remove="Icons\exe-file.ico" />
+    <None Remove="Icons\file.ico" />
+    <None Remove="Icons\folder.ico" />
+    <None Remove="Icons\text-file.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +32,11 @@
 
   <ItemGroup>
     <Resource Include="Icons\back-arrow.ico" />
+    <Resource Include="Icons\drive.ico" />
+    <Resource Include="Icons\exe-file.ico" />
+    <Resource Include="Icons\file.ico" />
+    <Resource Include="Icons\folder.ico" />
+    <Resource Include="Icons\text-file.ico" />
   </ItemGroup>
 
 </Project>
