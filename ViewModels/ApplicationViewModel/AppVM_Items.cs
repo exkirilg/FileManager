@@ -1,14 +1,23 @@
 ﻿using FileManager.ViewModels.Items;
 using FileManager.ViewModels.Items.Interfaces;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace FileManager.ViewModels;
 
 public partial class AppVM
 {
+    private ObservableCollection<IItemVM> _items = new();
     private IItemVM? _selectedItem;
+    private string? _search;
 
-    public ObservableCollection<IItemVM> Items { get; init; } = new();
+    public ObservableCollection<IItemVM> Items
+    {
+        get
+        {
+            return new (_items.Where(i => string.IsNullOrEmpty(Search) || i.Item.Name.Contains(Search, System.StringComparison.CurrentCultureIgnoreCase)));
+        }
+    }
     public IItemVM? SelectedItem
     {
         get => _selectedItem;
@@ -16,6 +25,19 @@ public partial class AppVM
         {
             _selectedItem = value;
             OnPropertyChanged(nameof(SelectedItem));
+        }
+    }
+    public string? Search
+    {
+        get => _search;
+        set
+        {
+            _search = value;
+
+            SelectedItem = null;
+
+            OnPropertyChanged(nameof(Search));
+            OnPropertyChanged(nameof(Items));
         }
     }
 
@@ -40,7 +62,7 @@ public partial class AppVM
     {
         foreach (var driveName in _fsServices.TryGetDrives())
         {
-            Items.Add(new DriveVM(_fsServices, driveName));
+            _items.Add(new DriveVM(_fsServices, driveName));
         }
     }
 
@@ -48,12 +70,12 @@ public partial class AppVM
     {
         foreach (var folderPath in _fsServices.TryGetFolders(CurrentPath))
         {
-            Items.Add(new FolderVM(_fsServices, folderPath));
+            _items.Add(new FolderVM(_fsServices, folderPath));
         }
 
         foreach (var filePath in _fsServices.TryGetFiles(CurrentPath))
         {
-            Items.Add(new FileVM(_fsServices, filePath));
+            _items.Add(new FileVM(_fsServices, filePath));
         }
     }
 }

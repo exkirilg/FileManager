@@ -16,7 +16,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Icons\back-arrow.ico" />
     <None Remove="Icons\drive.ico" />
     <None Remove="Icons\exe-file.ico" />
     <None Remove="Icons\file.ico" />
@@ -31,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Icons\back-arrow.ico" />
     <Resource Include="Icons\drive.ico" />
     <Resource Include="Icons\exe-file.ico" />
     <Resource Include="Icons\file.ico" />

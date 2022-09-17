@@ -14,6 +14,6 @@ public struct PartOfPath
 
     public override string ToString()
     {
-        return $"{RelevantPath} >";
+        return $"{RelevantPath} ›";
     }
 }

@@ -19,7 +19,7 @@ public partial class AppVM
             {
                 _currentPath = value;
                 PartsOfPath.Clear();
-                Items.Clear();
+                _items.Clear();
 
                 PopulateItemsWithDrives();
             }
@@ -30,7 +30,7 @@ public partial class AppVM
 
                 _currentPath = dirInfo.FullName;
                 PartsOfPath.Clear();
-                Items.Clear();
+                _items.Clear();
 
                 PopulatePartsOfPath(dirInfo.FullName);
                 PopulateItems();
@@ -43,12 +43,13 @@ public partial class AppVM
     }
     public ObservableCollection<PartOfPath> PartsOfPath { get; init; } = new();
 
-    public RelayCommand BackCommand { get; private set; }
+    public RelayCommand UpCommand { get; private set; }
     public RelayCommand SetCurrentPathCommand { get; private set; }
-
+    public RelayCommand RefreshCommand { get; private set; }
+    
     private void InitializeCurrentPathCommands()
     {
-        BackCommand = new RelayCommand(obj =>
+        UpCommand = new RelayCommand(obj =>
         {
             if (string.IsNullOrEmpty(CurrentPath)) return;
 
@@ -71,6 +72,12 @@ public partial class AppVM
             }
 
             throw new ArgumentException("Invalid parameter", nameof(obj));
+        });
+
+        RefreshCommand = new RelayCommand(obj =>
+        {
+            SelectedItem = null;
+            CurrentPath = CurrentPath;
         });
     }
     private void PopulatePartsOfPath(string fullPath)
