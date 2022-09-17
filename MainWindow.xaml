@@ -33,13 +33,13 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Path=Presentation}" FontSize="14">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseDown">
-                                <i:InvokeCommandAction
-                                    Command="{Binding Path=DataContext.SetCurrentPathCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                    CommandParameter="{Binding Path=FullPath}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding Path=DataContext.SetCurrentPathCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                        CommandParameter="{Binding Path=FullPath}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -47,10 +47,21 @@
 
         </Grid>
 
-        <ListBox ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" Background="#FFEEEEEE">
+        <ListBox ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}"
+                 Background="#FFEEEEEE" HorizontalContentAlignment="Stretch" Focusable="False">
+
+            
+            
             <ListBox.ItemTemplate>
                 <DataTemplate>
+
                     <Grid>
+
+                        <Grid.InputBindings>
+                            <MouseBinding MouseAction="LeftDoubleClick"
+                                          Command="{Binding Path=DataContext.ExpandItem, RelativeSource={RelativeSource AncestorType=Window}}"
+                                          CommandParameter="{Binding}"/>
+                        </Grid.InputBindings>
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100" />
@@ -65,8 +76,10 @@
                         <TextBlock Grid.Column="1" Text="{Binding Path=Item.Name}" VerticalAlignment="Center" FontSize="14" />
 
                     </Grid>
+                    
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            
         </ListBox>
 
     </DockPanel>

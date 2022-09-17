@@ -19,9 +19,26 @@ public partial class AppVM
         }
     }
 
+    public RelayCommand SelectItem { get; private set; }
+    public RelayCommand ExpandItem { get; private set; }
+
+    private void InitializeItemsCommands()
+    {
+        SelectItem = new RelayCommand(obj =>
+        {
+            SelectedItem = obj as IItemVM;
+        });
+
+        ExpandItem = new RelayCommand(obj =>
+        {
+            SelectedItem = obj as IItemVM;
+            SelectedItem?.Expand(this);
+        });
+    }
+
     private void PopulateItemsWithDrives()
     {
-        foreach (var driveName in _fsServices.GetDrives())
+        foreach (var driveName in _fsServices.TryGetDrives())
         {
             Items.Add(new DriveVM(_fsServices, driveName));
         }
@@ -29,12 +46,12 @@ public partial class AppVM
 
     private void PopulateItems()
     {
-        foreach (var folderPath in _fsServices.GetFolders(CurrentPath))
+        foreach (var folderPath in _fsServices.TryGetFolders(CurrentPath))
         {
             Items.Add(new FolderVM(_fsServices, folderPath));
         }
 
-        foreach (var filePath in _fsServices.GetFiles(CurrentPath))
+        foreach (var filePath in _fsServices.TryGetFiles(CurrentPath))
         {
             Items.Add(new FileVM(_fsServices, filePath));
         }

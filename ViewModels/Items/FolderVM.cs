@@ -16,4 +16,9 @@ public class FolderVM : AbstractItemVM
         })
     {
     }
+
+    public override void Expand(AppVM appVM)
+    {
+        appVM.CurrentPath = Item.FullPath;
+    }
 }

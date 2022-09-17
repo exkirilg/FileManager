@@ -14,6 +14,7 @@ public partial class AppVM : INotifyPropertyChanged
         CurrentPath = string.Empty;
 
         InitializeCurrentPathCommands();
+        InitializeItemsCommands();
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

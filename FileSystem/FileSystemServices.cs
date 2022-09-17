@@ -1,24 +1,51 @@
-﻿using System;
+﻿using FileManager.Models.FileSystemItems.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 namespace FileManager.FileSystem;
 
 public class FileSystemServices : IFileSystemServices
 {
-    public IEnumerable<string> GetDrives()
+    public IEnumerable<string> TryGetDrives()
     {
-        return Directory.GetLogicalDrives();
+        IEnumerable<string> result = Enumerable.Empty<string>();
+
+        try
+        {
+            result = Directory.GetLogicalDrives();
+        }
+        catch { }
+
+        return result;
     }
 
-    public IEnumerable<string> GetFolders(string path)
+    public IEnumerable<string> TryGetFolders(string path)
     {
-        return Directory.GetDirectories(path);
+        IEnumerable<string> result = Enumerable.Empty<string>();
+
+        try
+        {
+            result = Directory.GetDirectories(path);
+        }
+        catch { }
+
+        return result;
     }
 
-    public IEnumerable<string> GetFiles(string path)
+    public IEnumerable<string> TryGetFiles(string path)
     {
-        return Directory.GetFiles(path);
+        IEnumerable<string> result = Enumerable.Empty<string>();
+
+        try
+        {
+            result = Directory.GetFiles(path);
+        }
+        catch { }
+
+        return result;
     }
 
     public DirectoryInfo GetFolderInfo(string path)
@@ -39,5 +66,15 @@ public class FileSystemServices : IFileSystemServices
             throw new ArgumentException($"File {fileName} doesn't exist", nameof(fileName));
 
         return fileInfo;
+    }
+
+    public void TryExecuteFile(string fileName)
+    {
+        try
+        {
+            new Process { StartInfo = new ProcessStartInfo(fileName) { UseShellExecute = true } }
+                .Start();
+        }
+        catch { }
     }
 }

@@ -12,4 +12,9 @@ public class DriveVM : AbstractItemVM
         : base(fsServices, new Drive(fullPath, fullPath))
     {
     }
+
+    public override void Expand(AppVM appVM)
+    {
+        appVM.CurrentPath = Item.FullPath;
+    }
 }

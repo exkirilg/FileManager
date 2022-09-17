@@ -33,4 +33,9 @@ public class FileVM : AbstractItemVM
         })
     {
     }
+
+    public override void Expand(AppVM appVM)
+    {
+        _fsServices.TryExecuteFile(Item.FullPath);
+    }
 }

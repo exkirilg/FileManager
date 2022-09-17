@@ -22,4 +22,6 @@ public abstract class AbstractItemVM : IItemVM
         : this(fsServices, itemFunction.Invoke(fullPath, fsServices))
     {
     }
+
+    public abstract void Expand(AppVM appVM);
 }

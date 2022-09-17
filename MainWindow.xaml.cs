@@ -9,6 +9,5 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = applicationViewModel;
-        applicationViewModel.CurrentPath = @"D:\\Projects\\FileManager\\bin\\Debug\\net6.0-windows";
     }
 }

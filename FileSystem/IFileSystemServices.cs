@@ -5,9 +5,10 @@ namespace FileManager.FileSystem;
 
 public interface IFileSystemServices
 {
-    IEnumerable<string> GetDrives();
-    IEnumerable<string> GetFolders(string path);
-    IEnumerable<string> GetFiles(string path);
+    IEnumerable<string> TryGetDrives();
+    IEnumerable<string> TryGetFolders(string path);
+    IEnumerable<string> TryGetFiles(string path);
     DirectoryInfo GetFolderInfo(string path);
     FileInfo GetFileInfo(string fileName);
+    void TryExecuteFile(string fileName);
 }
