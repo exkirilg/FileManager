@@ -3,11 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:FileManager.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <ResourceDictionary Source="pack://application:,,,/Resources/Styles.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:BytesConverter x:Key="BytesConverter" />
+            <converters:BytesRoundConverter x:Key="BytesRoundConverter" />
+        </ResourceDictionary>
+
     </UserControl.Resources>
 
     <Grid DataContext="{Binding SelectedItem}">
@@ -47,18 +56,24 @@
         <Separator Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Margin="0 10"  />
 
         <TextBlock Grid.Column="0" Grid.Row="6" Text="Capacity:" Style="{StaticResource TextBlockInfoTitle}" />
-        <TextBox Grid.Column="1" Grid.Row="6" IsReadOnly="True" Text="{Binding Path=Info.CapacityToString, Mode=OneWay}" Style="{StaticResource TextBoxInfo}" />
-        <TextBox Grid.Column="2" Grid.Row="6" IsReadOnly="True" Text="{Binding Path=Info.CapacityInGBToString, Mode=OneWay}" Style="{StaticResource TextBoxInfo}" />
+        <TextBox Grid.Column="1" Grid.Row="6" IsReadOnly="True"
+                 Text="{Binding Path=Info.Capacity, Mode=OneWay, Converter={StaticResource BytesConverter}}" Style="{StaticResource TextBoxInfo}" />
+        <TextBox Grid.Column="2" Grid.Row="6" IsReadOnly="True"
+                 Text="{Binding Path=Info.Capacity, Mode=OneWay, Converter={StaticResource BytesRoundConverter}}" Style="{StaticResource TextBoxInfo}" />
 
         <Separator Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="7" Margin="0 10"  />
 
         <TextBlock Grid.Column="0" Grid.Row="8" Text="Used space:" Style="{StaticResource TextBlockInfoTitle}" />
-        <TextBox Grid.Column="1" Grid.Row="8" IsReadOnly="True" Text="{Binding Path=Info.UsedSpaceToString, Mode=OneWay}" Style="{StaticResource TextBoxInfo}" />
-        <TextBox Grid.Column="2" Grid.Row="8" IsReadOnly="True" Text="{Binding Path=Info.UsedSpaceInGBToString, Mode=OneWay}" Style="{StaticResource TextBoxInfo}" />
+        <TextBox Grid.Column="1" Grid.Row="8" IsReadOnly="True"
+                 Text="{Binding Path=Info.UsedSpace, Mode=OneWay, Converter={StaticResource BytesConverter}}" Style="{StaticResource TextBoxInfo}" />
+        <TextBox Grid.Column="2" Grid.Row="8" IsReadOnly="True"
+                 Text="{Binding Path=Info.UsedSpace, Mode=OneWay, Converter={StaticResource BytesRoundConverter}}" Style="{StaticResource TextBoxInfo}" />
 
         <TextBlock Grid.Column="0" Grid.Row="9" Text="Free space:" Style="{StaticResource TextBlockInfoTitle}" />
-        <TextBox Grid.Column="1" Grid.Row="9" IsReadOnly="True" Text="{Binding Path=Info.FreeSpaceToString, Mode=OneWay}" Style="{StaticResource TextBoxInfo}" />
-        <TextBox Grid.Column="2" Grid.Row="9" IsReadOnly="True" Text="{Binding Path=Info.FreeSpaceInGBToString, Mode=OneWay}" Style="{StaticResource TextBoxInfo}" />
+        <TextBox Grid.Column="1" Grid.Row="9" IsReadOnly="True"
+                 Text="{Binding Path=Info.FreeSpace, Mode=OneWay, Converter={StaticResource BytesConverter}}" Style="{StaticResource TextBoxInfo}" />
+        <TextBox Grid.Column="2" Grid.Row="9" IsReadOnly="True"
+                 Text="{Binding Path=Info.FreeSpace, Mode=OneWay, Converter={StaticResource BytesRoundConverter}}" Style="{StaticResource TextBoxInfo}" />
 
     </Grid>
     

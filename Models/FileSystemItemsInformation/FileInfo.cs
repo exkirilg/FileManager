@@ -15,9 +15,6 @@ public class FileInfo : IInfo
 
     public long Size { get; init; }
 
-    public string SizeToString => $"{Size:N0} bytes";
-    public string SizeInMBToString => $"{Math.Round(Size / 1024d / 1024d, 2):N0} MB";
-
     public FileInfo(string name, string location, string extension, DateTime creationTime, DateTime lastModified, DateTime lastAccessed, long size)
     {
         Name = name;

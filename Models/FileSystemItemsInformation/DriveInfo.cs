@@ -12,14 +12,6 @@ public class DriveInfo : IInfo
     public long UsedSpace { get; init; }
     public long FreeSpace { get; init; }
 
-    public string CapacityToString => $"{Capacity:N0} bytes";
-    public string UsedSpaceToString => $"{UsedSpace:N0} bytes";
-    public string FreeSpaceToString => $"{FreeSpace:N0} bytes";
-
-    public string CapacityInGBToString => $"{Math.Round(Capacity / 1024d / 1024d / 1024d, 2):N0} GB";
-    public string UsedSpaceInGBToString => $"{Math.Round(UsedSpace / 1024d / 1024d / 1024d, 2):N0} GB";
-    public string FreeSpaceInGBToString => $"{Math.Round(FreeSpace / 1024d / 1024d/ 1024d, 2):N0} GB";
-
     public DriveInfo(string name, string fileSystem, long capacity, long usedSpace, long freeSpace)
     {
         Name = name;

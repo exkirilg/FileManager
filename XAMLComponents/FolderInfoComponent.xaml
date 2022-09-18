@@ -3,11 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:FileManager.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <ResourceDictionary Source="pack://application:,,,/Resources/Styles.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:BytesConverter x:Key="BytesConverter" />
+            <converters:BytesRoundConverter x:Key="BytesRoundConverter" />
+            <converters:AmountOfFilesConverter x:Key="AmountOfFilesConverter" />
+            <converters:AmountOfFoldersConverter x:Key="AmountOfFoldersConverter" />
+        </ResourceDictionary>
+
     </UserControl.Resources>
 
     <Grid DataContext="{Binding SelectedItem}">
@@ -47,14 +58,18 @@
         <Separator Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Margin="0 10"  />
 
         <TextBlock Grid.Column="0" Grid.Row="6" Text="Size:" Style="{StaticResource TextBlockInfoTitle}" />
-        <TextBox Grid.Column="1" Grid.Row="6" IsReadOnly="True" Text="{Binding Path=Info.SizeToString, Mode=OneWay}" Style="{StaticResource TextBoxInfo}" />
-        <TextBox Grid.Column="2" Grid.Row="6" IsReadOnly="True" Text="{Binding Path=Info.SizeInMBToString, Mode=OneWay}" Style="{StaticResource TextBoxInfo}" />
+        <TextBox Grid.Column="1" Grid.Row="6" IsReadOnly="True"
+                 Text="{Binding Path=Info.Size, Mode=OneWay, Converter={StaticResource BytesConverter}}" Style="{StaticResource TextBoxInfo}" />
+        <TextBox Grid.Column="2" Grid.Row="6" IsReadOnly="True"
+                 Text="{Binding Path=Info.Size, Mode=OneWay, Converter={StaticResource BytesRoundConverter}}" Style="{StaticResource TextBoxInfo}" />
 
         <Separator Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="7" Margin="0 10"  />
 
         <TextBlock Grid.Column="0" Grid.Row="8" Text="Contains:" Style="{StaticResource TextBlockInfoTitle}" />
-        <TextBox Grid.Column="1" Grid.Row="8" IsReadOnly="True" Text="{Binding Path=Info.AmountOfFilesToString, Mode=OneWay}" Style="{StaticResource TextBoxInfo}" />
-        <TextBox Grid.Column="2" Grid.Row="8" IsReadOnly="True" Text="{Binding Path=Info.AmountOfFoldersToString, Mode=OneWay}" Style="{StaticResource TextBoxInfo}" />
+        <TextBox Grid.Column="1" Grid.Row="8" IsReadOnly="True"
+                 Text="{Binding Path=Info.AmountOfFiles, Mode=OneWay, Converter={StaticResource AmountOfFilesConverter}}" Style="{StaticResource TextBoxInfo}" />
+        <TextBox Grid.Column="2" Grid.Row="8" IsReadOnly="True"
+                 Text="{Binding Path=Info.AmountOfFolders, Mode=OneWay, Converter={StaticResource AmountOfFoldersConverter}}" Style="{StaticResource TextBoxInfo}" />
 
     </Grid>
 
