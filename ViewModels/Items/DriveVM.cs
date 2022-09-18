@@ -9,10 +9,6 @@ public class DriveVM : AbstractItemVM
 {
     public override string IconSource => $"{IconSourceBase}drive.ico";
 
-    public override bool IsDrive => true;
-    public override bool IsFolder => false;
-    public override bool IsFile => false;
-
     public override IInfo Info => _fsServices.GetDriveInfo(Item.FullPath);
 
     public DriveVM(IFileSystemServices fsServices, string fullPath)

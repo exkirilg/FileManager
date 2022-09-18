@@ -9,10 +9,6 @@ public class FolderVM : AbstractItemVM
 {
     public override string IconSource => $"{IconSourceBase}folder.ico";
 
-    public override bool IsDrive => false;
-    public override bool IsFolder => true;
-    public override bool IsFile => false;
-
     public override IInfo Info => _fsServices.GetFolderInfo(Item.FullPath);
 
     public FolderVM(IFileSystemServices fsServices, string fullPath)

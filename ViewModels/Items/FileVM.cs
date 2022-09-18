@@ -26,10 +26,6 @@ public class FileVM : AbstractItemVM
         }
     }
 
-    public override bool IsDrive => false;
-    public override bool IsFolder => false;
-    public override bool IsFile => true;
-
     public override IInfo Info => _fsServices.GetFileInfo(Item.FullPath);
 
     public FileVM(IFileSystemServices fsServices, string fullPath)

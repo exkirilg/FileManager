@@ -8,10 +8,6 @@ public interface IItemVM
     IItem Item { get; }
     string IconSource { get; }
 
-    bool IsDrive { get; }
-    bool IsFolder { get; }
-    bool IsFile { get; }
-
     IInfo Info { get; }
 
     void Expand(AppVM appVM);

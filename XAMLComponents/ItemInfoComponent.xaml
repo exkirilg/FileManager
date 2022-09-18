@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Components="clr-namespace:FileManager.XAMLComponents"
+             xmlns:models="clr-namespace:FileManager.Models"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -41,15 +42,15 @@
                             <Setter Property="ContentTemplate" Value="{StaticResource EmptyInfoPresenter}" />
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=SelectedItem.IsDrive}" Value="True">
+                        <DataTrigger Binding="{Binding Path=SelectedItem.Item.Type}" Value="{x:Static models:TypeOfFileSystemItem.Drive}">
                             <Setter Property="ContentTemplate" Value="{StaticResource DriveInfoPresenter}" />
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=SelectedItem.IsFolder}" Value="True">
+                        <DataTrigger Binding="{Binding Path=SelectedItem.Item.Type}" Value="{x:Static models:TypeOfFileSystemItem.Folder}">
                             <Setter Property="ContentTemplate" Value="{StaticResource FolderInfoPresenter}" />
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=SelectedItem.IsFile}" Value="True">
+                        <DataTrigger Binding="{Binding Path=SelectedItem.Item.Type}" Value="{x:Static models:TypeOfFileSystemItem.File}">
                             <Setter Property="ContentTemplate" Value="{StaticResource FileInfoPresenter}" />
                         </DataTrigger>
 

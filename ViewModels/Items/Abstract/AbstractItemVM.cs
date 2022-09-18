@@ -14,10 +14,6 @@ public abstract class AbstractItemVM : IItemVM
     public IItem Item { get; init; }
     abstract public string IconSource { get; }
 
-    abstract public  bool IsDrive { get; }
-    abstract public bool IsFolder { get; }
-    abstract public bool IsFile { get; }
-
     abstract public IInfo Info { get; }
 
     protected AbstractItemVM(IFileSystemServices fsServices, IItem item)
