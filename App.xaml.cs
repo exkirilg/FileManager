@@ -1,5 +1,6 @@
 ﻿using FileManager.FileSystem;
 using FileManager.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
@@ -18,6 +19,10 @@ public partial class App : Application
 				services.AddSingleton<MainWindow>();
 				services.AddSingleton<IFileSystemServices, FileSystemServices>();
 				services.AddSingleton<AppVM>();
+				services.AddDbContext<ApplicationContext>(options =>
+				{
+					options.UseSqlite("Data Source=FileManager.db");
+				});
 			})
 			.Build();
 	}
@@ -25,6 +30,8 @@ public partial class App : Application
 	protected override async void OnStartup(StartupEventArgs e)
 	{
 		await AppHost!.StartAsync();
+
+		await AppHost.Services.GetRequiredService<ApplicationContext>().Database.EnsureCreatedAsync();
 
 		var startupForm = AppHost.Services.GetRequiredService<MainWindow>();
 		startupForm.Show();

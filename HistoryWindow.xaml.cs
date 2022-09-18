@@ -3,12 +3,11 @@ using System.Windows;
 
 namespace FileManager;
 
-public partial class MainWindow : Window
+public partial class HistoryWindow : Window
 {
-    public MainWindow(AppVM applicationViewModel)
+    public HistoryWindow(AppVM applicationViewModel)
     {
         InitializeComponent();
         DataContext = applicationViewModel;
-        WindowState = WindowState.Maximized;
     }
 }

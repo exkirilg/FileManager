@@ -1,5 +1,6 @@
 ﻿using FileManager.ViewModels.Items;
 using FileManager.ViewModels.Items.Interfaces;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -51,10 +52,18 @@ public partial class AppVM
             SelectedItem = obj as IItemVM;
         });
 
-        ExpandItem = new RelayCommand(obj =>
+        ExpandItem = new RelayCommand(async (obj) =>
         {
             SelectedItem = obj as IItemVM;
-            SelectedItem?.Expand(this);
+
+            if (SelectedItem is null) return;
+
+            SelectedItem.Expand(this);
+
+            if (SelectedItem is FileVM)
+            {
+                await SaveFileAccess(SelectedItem.Item.FullPath, DateTime.Now);
+            }
         });
     }
 

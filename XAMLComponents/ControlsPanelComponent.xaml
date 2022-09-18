@@ -17,11 +17,12 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="0.75*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
         <!-- Up Arrow -->
         <Button Grid.Column="0" Style="{StaticResource Button}" Command="{Binding UpCommand}" Padding="15 0">
-            <TextBlock Text="🡩" Style="{StaticResource TextArrowWhite}" />
+            <TextBlock Text="🡩" Style="{StaticResource TextIconWhite}" />
         </Button>
 
         <!-- Current Path -->
@@ -83,6 +84,11 @@
             </Grid>
 
         </Border>
+        
+        <!-- istory -->
+        <Button Grid.Column="3" Style="{StaticResource Button}" Command="{Binding HistoryCommand}" Padding="10 0">
+            <TextBlock Text="🔧" Style="{StaticResource TextIconWhite}" />
+        </Button>
 
     </Grid>
 
