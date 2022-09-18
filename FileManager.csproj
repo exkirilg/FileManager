@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>file-manager.ico</ApplicationIcon>
+	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;8618</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;8618</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Icons\drive.ico" />
+    <None Remove="Icons\exe-file.ico" />
+    <None Remove="Icons\file.ico" />
+    <None Remove="Icons\folder.ico" />
+    <None Remove="Icons\text-file.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="file-manager.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.9" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\drive.ico" />
+    <Resource Include="Icons\exe-file.ico" />
+    <Resource Include="Icons\file.ico" />
+    <Resource Include="Icons\folder.ico" />
+    <Resource Include="Icons\text-file.ico" />
+  </ItemGroup>
+
+</Project>
