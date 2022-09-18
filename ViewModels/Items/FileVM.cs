@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using FileManager.FileSystem;
 using FileManager.Models.FileSystemItems;
-using FileManager.Models.FileSystemItemsInformation.Interfaces;
 using FileManager.ViewModels.Items.Abstract;
 
 namespace FileManager.ViewModels.Items;
@@ -26,13 +26,11 @@ public class FileVM : AbstractItemVM
         }
     }
 
-    public override IInfo Info => _fsServices.GetFileInfo(Item.FullPath);
-
     public FileVM(IFileSystemServices fsServices, string fullPath)
         : base(fsServices, fullPath, (fullPath, fsServices) =>
         {
-            var fileInfo = fsServices.GetFileInfo(fullPath);
-            return new File(fullPath, fileInfo.Name, fileInfo.Extension);
+            var (fullName, name, extension) = fsServices.GetBasicFileInfo(fullPath);
+            return new File(fullName, name, extension);
         })
     {
     }
@@ -40,5 +38,10 @@ public class FileVM : AbstractItemVM
     public override void Expand(AppVM appVM)
     {
         _fsServices.TryExecuteFile(Item.FullPath);
+    }
+
+    protected override async Task LoadInfoAsync()
+    {
+        Info = await _fsServices.GetFileInfoAsync(Item.FullPath);
     }
 }
