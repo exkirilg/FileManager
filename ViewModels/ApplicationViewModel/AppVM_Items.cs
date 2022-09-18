@@ -7,7 +7,7 @@ namespace FileManager.ViewModels;
 
 public partial class AppVM
 {
-    private ObservableCollection<IItemVM> _items = new();
+    private readonly ObservableCollection<IItemVM> _items = new();
     private IItemVM? _selectedItem;
     private string? _search;
 
