@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="FileManager.XAMLComponents.ItemInfoComponent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Components="clr-namespace:FileManager.XAMLComponents"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/Resources/Styles.xaml" />
+    </UserControl.Resources>
+
+    <Border Margin="20 10" BorderBrush="Wheat" BorderThickness="1" Padding="20 10">
+
+        <ContentPresenter Content="{Binding}" Grid.Column="1" Grid.Row="1">
+
+            <ContentPresenter.Resources>
+
+                <DataTemplate x:Key="EmptyInfoPresenter" />
+
+                <DataTemplate x:Key="DriveInfoPresenter">
+                    <Components:DriveInfoComponent DataContext="{Binding}"/>
+                </DataTemplate>
+
+                <DataTemplate x:Key="FolderInfoPresenter">
+                    <Components:FolderInfoComponent DataContext="{Binding}"/>
+                </DataTemplate>
+
+                <DataTemplate x:Key="FileInfoPresenter">
+                    <Components:FileInfoComponent DataContext="{Binding}"/>
+                </DataTemplate>
+
+            </ContentPresenter.Resources>
+
+            <ContentPresenter.Style>
+                <Style TargetType="{x:Type ContentPresenter}">
+                    <Style.Triggers>
+
+                        <DataTrigger Binding="{Binding Path=SelectedItem}" Value="{x:Null}">
+                            <Setter Property="ContentTemplate" Value="{StaticResource EmptyInfoPresenter}" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Path=SelectedItem.IsDrive}" Value="True">
+                            <Setter Property="ContentTemplate" Value="{StaticResource DriveInfoPresenter}" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Path=SelectedItem.IsFolder}" Value="True">
+                            <Setter Property="ContentTemplate" Value="{StaticResource FolderInfoPresenter}" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Path=SelectedItem.IsFile}" Value="True">
+                            <Setter Property="ContentTemplate" Value="{StaticResource FileInfoPresenter}" />
+                        </DataTrigger>
+
+                    </Style.Triggers>
+                </Style>
+            </ContentPresenter.Style>
+
+        </ContentPresenter>
+
+    </Border>
+
+</UserControl>

@@ -1,6 +1,7 @@
 ﻿using System;
 using FileManager.FileSystem;
 using FileManager.Models.FileSystemItems;
+using FileManager.Models.FileSystemItemsInformation.Interfaces;
 using FileManager.ViewModels.Items.Abstract;
 
 namespace FileManager.ViewModels.Items;
@@ -25,11 +26,17 @@ public class FileVM : AbstractItemVM
         }
     }
 
+    public override bool IsDrive => false;
+    public override bool IsFolder => false;
+    public override bool IsFile => true;
+
+    public override IInfo Info => _fsServices.GetFileInfo(Item.FullPath);
+
     public FileVM(IFileSystemServices fsServices, string fullPath)
         : base(fsServices, fullPath, (fullPath, fsServices) =>
         {
             var fileInfo = fsServices.GetFileInfo(fullPath);
-            return new File(fileInfo.FullName, fileInfo.Name, fileInfo.Extension);
+            return new File(fullPath, fileInfo.Name, fileInfo.Extension);
         })
     {
     }
