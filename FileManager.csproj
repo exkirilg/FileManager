@@ -5,6 +5,8 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>file-manager.ico</ApplicationIcon>
+	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -21,6 +23,10 @@
     <None Remove="Icons\file.ico" />
     <None Remove="Icons\folder.ico" />
     <None Remove="Icons\text-file.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="file-manager.ico" />
   </ItemGroup>
 
   <ItemGroup>
